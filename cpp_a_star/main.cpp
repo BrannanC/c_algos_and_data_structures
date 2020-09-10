@@ -189,7 +189,7 @@ string CellString(State cell)
     case State::kFinish:
         return "🏁   ";
     default:
-        return "0   ";
+        return " 0   ";
     }
 }
 
@@ -211,5 +211,10 @@ int main()
     int goal[2]{4, 5};
     auto board = ReadBoardFile("1.board");
     auto solution = Search(board, init, goal);
+    cout << "*************"
+         << "\n";
     PrintBoard(solution);
+    cout << "*************"
+         << "\n";
 }
+
