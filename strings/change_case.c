@@ -100,6 +100,22 @@ int is_palindrome(char a[])
     return 1;
 }
 
+int has_dupe(char s[])
+{
+    long int h = 0, x = 0;
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        x = 1;
+        x <<= ch_to_lower(s[i]) - 97;
+        if ((x & h) > 0)
+        {
+            return 1;
+        }
+        h |= x;
+    }
+    return 0;
+}
+
 int main()
 {
     char word_dog[] = "*** SPONGEBOB ***";
@@ -115,6 +131,8 @@ int main()
     printf("%s \n", word_dog);
     printf("is_pal %s %d \n", word_dog, is_palindrome(word_dog));
     printf("is_pal %s %d \n", "noon", is_palindrome("noon"));
+    printf("has_dup %s %d \n", word_dog, has_dupe(word_dog));
+    printf("has_dup %s %d \n", "asdfghj", has_dupe("asdfghj"));
 
     return 0;
 }
