@@ -116,6 +116,29 @@ int has_dupe(char s[])
     return 0;
 }
 
+int is_anagram(char a[], char b[])
+{
+    int h[25] = {0};
+    for (int i = 0; a[i] != '\0'; i++)
+    {
+        h[ch_to_lower(a[i]) - 97] += 1;
+    }
+
+    for (int i = 0; b[i] != '\0'; i++)
+    {
+        h[ch_to_lower(b[i]) - 97] -= 1;
+        if (h[ch_to_lower(b[i]) - 97] < 0)
+            return 0;
+    }
+
+    for (int i = 0; i < 25; i++)
+    {
+        if (h[i] != 0)
+            return 0;
+    }
+    return 1;
+}
+
 int main()
 {
     char word_dog[] = "*** SPONGEBOB ***";
@@ -133,6 +156,7 @@ int main()
     printf("is_pal %s %d \n", "noon", is_palindrome("noon"));
     printf("has_dup %s %d \n", word_dog, has_dupe(word_dog));
     printf("has_dup %s %d \n", "asdfghj", has_dupe("asdfghj"));
-
+    printf("is anagram %s %s %d \n", "medical", "decimal", is_anagram("medical", "decimal"));
+    printf("is anagram %s %s %d \n", "asdf", "dfgh", is_anagram("asdf", "dfgh"));
     return 0;
 }
