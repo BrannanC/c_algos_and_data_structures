@@ -173,6 +173,26 @@ void print_perms(char *s)
     perms_helper(s, res, a, 0);
 }
 
+void better_helper(char s[], int l, int h)
+{
+    if (l == h)
+        printf("%s \n", s);
+    else
+    {
+        for (int i = l; i <= h; i++)
+        {
+            ch_swap(&s[l], &s[i]);
+            better_helper(s, l + 1, h);
+            ch_swap(&s[l], &s[i]);
+        }
+    }
+}
+
+void better_print_perms(char s[])
+{
+    better_helper(s, 0, strlen(s) - 1);
+}
+
 int main()
 {
     char word_dog[] = "*** SPONGEBOB ***";
@@ -192,6 +212,8 @@ int main()
     printf("has_dup %s %d \n", "asdfghj", has_dupe("asdfghj"));
     printf("is anagram %s %s %d \n", "medical", "decimal", is_anagram("medical", "decimal"));
     printf("is anagram %s %s %d \n", "asdf", "dfgh", is_anagram("asdf", "dfgh"));
-    print_perms("abc");
+    // print_perms("abc");
+    char alpha[] = "abc";
+    better_print_perms(alpha);
     return 0;
 }
