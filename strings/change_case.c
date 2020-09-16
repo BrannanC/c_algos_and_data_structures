@@ -139,6 +139,40 @@ int is_anagram(char a[], char b[])
     return 1;
 }
 
+void perms_helper(char *s, char res[], int a[], int k)
+{
+    if (s[k] == '\0')
+    {
+        res[k] = '\0';
+        printf("%s \n", res);
+    }
+    else
+    {
+        for (int i = 0; s[i] != '\0'; i++)
+        {
+            if (a[i] == 0)
+            {
+                res[k] = s[i];
+                a[i] = 1;
+                perms_helper(s, res, a, k + 1);
+                a[i] = 0;
+            }
+        }
+    }
+}
+
+void print_perms(char *s)
+{
+    int l = strlen(s);
+    int a[l];
+    char res[l];
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        a[i] = 0;
+    }
+    perms_helper(s, res, a, 0);
+}
+
 int main()
 {
     char word_dog[] = "*** SPONGEBOB ***";
@@ -158,5 +192,6 @@ int main()
     printf("has_dup %s %d \n", "asdfghj", has_dupe("asdfghj"));
     printf("is anagram %s %s %d \n", "medical", "decimal", is_anagram("medical", "decimal"));
     printf("is anagram %s %s %d \n", "asdf", "dfgh", is_anagram("asdf", "dfgh"));
+    print_perms("abc");
     return 0;
 }
