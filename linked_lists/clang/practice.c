@@ -103,6 +103,30 @@ void move_to_head(struct Node *p, int val)
     }
 }
 
+void Insert(struct Node *p, int idx, int val)
+{
+    if (idx < 0 || idx > count(p))
+        return;
+
+    struct Node *t;
+    t = (struct Node *)malloc(sizeof(struct Node));
+    t->data = val;
+    if (idx == 0)
+    {
+        t->next = p;
+        first = t;
+    }
+    else
+    {
+        for (int i = 0; i < idx; i++)
+        {
+            p = p->next;
+        }
+        t->next = p->next;
+        p->next = t;
+    }
+}
+
 int main()
 {
     int arr[] = {3, 5, 7, 10, 15};
@@ -113,6 +137,10 @@ int main()
     printf("%d \n", sum(first));
     printf("%d \n", max(first));
     move_to_head(first, 7);
+    Display(first);
+    Insert(first, 0, 99);
+    Display(first);
+    Insert(first, 3, 77);
     Display(first);
     return 0;
 }
