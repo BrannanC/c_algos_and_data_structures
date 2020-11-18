@@ -67,6 +67,8 @@ T Array<T>::Delete(int ind)
     return x;
 }
 
+
+
 int main(int argc, const char *argv[])
 {
     Array<float> arr(10);
