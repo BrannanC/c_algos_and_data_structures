@@ -1,4 +1,4 @@
-#include <lcthw/dbllist.h>
+#include <lcthw/dllist.h>
 #include <lcthw/dbg.h>
 
 DLList *DLList_create()
@@ -88,6 +88,12 @@ void DLList_unshift(DLList *list, void *value)
 
 error:
     return;
+}
+
+void *DLList_shift(DLList *list)
+{
+    DLListNode *node = list->first;
+    return node != NULL ? DLList_remove(list, node) : NULL;
 }
 
 void *DLList_remove(DLList *list, DLListNode *node)
