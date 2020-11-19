@@ -18,7 +18,6 @@ char *test_create()
 char *test_destroy()
 {
     DLList_clear_destroy(list);
-
     return NULL;
 }
 
@@ -62,6 +61,15 @@ char *test_unshift()
     return NULL;
 }
 
+char *test_swap()
+{
+    DLList_swap(list->first, list->last);
+    mu_assert(list->first->value == test1, "Failed swap.");
+    DLList_swap(list->first, list->last);
+    mu_assert(list->first->value == test3, "Failed swap.");
+    return NULL;
+}
+
 char *test_remove()
 {
     char *val = DLList_remove(list, list->first->next);
@@ -92,6 +100,7 @@ char *all_tests()
     mu_run_test(test_create);
     mu_run_test(test_push_pop);
     mu_run_test(test_unshift);
+    mu_run_test(test_swap);
     mu_run_test(test_remove);
     mu_run_test(test_shift);
     mu_run_test(test_destroy);

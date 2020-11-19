@@ -30,8 +30,11 @@ void DLList_clear(DLList *list)
 
 void DLList_clear_destroy(DLList *list)
 {
+    printf("\n---start\n");
     DLList_clear(list);
+    printf("cleared\n");
     DLList_destroy(list);
+    printf("destroyed\n");
 }
 
 void DLList_push(DLList *list, void *value)
@@ -116,7 +119,7 @@ void *DLList_remove(DLList *list, DLListNode *node)
     else if (node == list->last)
     {
         list->last = node->prev;
-        check(list->last != NULL, "Ivalid list.");
+        check(list->last != NULL, "Invalid list.");
         list->last->next = NULL;
     }
     else
@@ -133,4 +136,49 @@ void *DLList_remove(DLList *list, DLListNode *node)
     return res;
 error:
     return res;
+}
+
+void DLList_swap(DLListNode *lhs, DLListNode *rhs)
+{
+    void *tmp = lhs->value;
+    lhs->value = rhs->value;
+    rhs->value = tmp;
+}
+
+DLList *DLList_copy(DLList *list)
+{
+    DLList *clone = DLList_create();
+
+    DLLIST_FOREACH(list, first, next, cur)
+    {
+        DLList_unshift(clone, cur->value);
+    }
+
+    return clone;
+}
+
+DLList *DLList_join(DLList *a, DLList *b)
+{
+    DLList *joined = DLList_copy(a);
+    DLLIST_FOREACH(b, first, next, cur)
+    {
+        DLList_push(joined, cur->value);
+    }
+
+    return joined;
+}
+
+/* DLList_split truncates the original list and returns the truncated items
+as another list */
+DLList *DLList_split(DLList *list, int index)
+{
+    if (index >= list->count - 1)
+        return NULL;
+    DLList *right = DLList_create();
+    while (list->count >= index)
+    {
+        DLList_unshift(right, DLList_pop(list));
+    }
+
+    return right;
 }

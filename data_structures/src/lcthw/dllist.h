@@ -31,6 +31,10 @@ void DLList_push(DLList *list, void *value);
 void *DLList_pop(DLList *list);
 void DLList_unshift(DLList *list, void *value);
 void *DLList_shift(DLList *list);
+void DLList_swap(DLListNode *lhs, DLListNode *rhs);
+DLList *DLList_copy(DLList *list);
+DLList *DLList_join(DLList *a, DLList *b);
+DLList *DLList_split(DLList *list, int index);
 
 void *DLList_remove(DLList *list, DLListNode *node);
 
