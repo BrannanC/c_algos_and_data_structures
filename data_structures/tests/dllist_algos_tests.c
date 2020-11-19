@@ -34,7 +34,6 @@ int is_sorted(DLList *words)
 
 char *test_bubble_sort()
 {
-    printf("\n-------BUBBLE\n");
     DLList *words = create_words();
 
     int rc = DLList_bubble_sort(words, (DLList_compare)strcmp);
@@ -43,7 +42,6 @@ char *test_bubble_sort()
 
     DLList_destroy(words);
 
-    printf("   Finished\n");
     words = DLList_create(words);
     rc = DLList_bubble_sort(words, (DLList_compare)strcmp);
     mu_assert(rc == 0, "Bubble sort failed empty list.");
@@ -71,7 +69,7 @@ char *all_tests()
 {
     mu_suite_start();
     mu_run_test(test_bubble_sort);
-    // mu_run_test(test_merge_sort);
+    mu_run_test(test_merge_sort);
 
     return NULL;
 }

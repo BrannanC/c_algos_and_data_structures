@@ -3,6 +3,7 @@
 #include <assert.h>
 
 static DLList *list = NULL;
+static DLList *right = NULL;
 char *test1 = "test1 data";
 char *test2 = "test2 data";
 char *test3 = "test3 data";
@@ -94,6 +95,21 @@ char *test_shift()
     return NULL;
 }
 
+char *test_split()
+{
+    right = DLList_split(list, 1);
+    mu_assert(list->count == 1, "Failed split.");
+    mu_assert(right->count == 2, "Failed split.");
+    return NULL;
+}
+
+char *test_join()
+{
+    list = DLList_join(list, right);
+    mu_assert(list->count == 3, "Failed join.");
+    return NULL;
+}
+
 char *all_tests()
 {
     mu_suite_start();
@@ -101,6 +117,8 @@ char *all_tests()
     mu_run_test(test_push_pop);
     mu_run_test(test_unshift);
     mu_run_test(test_swap);
+    mu_run_test(test_split);
+    mu_run_test(test_join);
     mu_run_test(test_remove);
     mu_run_test(test_shift);
     mu_run_test(test_destroy);

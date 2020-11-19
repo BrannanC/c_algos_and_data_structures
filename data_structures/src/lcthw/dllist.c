@@ -30,11 +30,8 @@ void DLList_clear(DLList *list)
 
 void DLList_clear_destroy(DLList *list)
 {
-    printf("\n---start\n");
     DLList_clear(list);
-    printf("cleared\n");
     DLList_destroy(list);
-    printf("destroyed\n");
 }
 
 void DLList_push(DLList *list, void *value)
@@ -172,10 +169,10 @@ DLList *DLList_join(DLList *a, DLList *b)
 as another list */
 DLList *DLList_split(DLList *list, int index)
 {
-    if (index >= list->count - 1)
+    if (index >= list->count)
         return NULL;
     DLList *right = DLList_create();
-    while (list->count >= index)
+    while (list->count > index)
     {
         DLList_unshift(right, DLList_pop(list));
     }
