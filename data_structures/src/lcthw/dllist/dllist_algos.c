@@ -1,13 +1,12 @@
 #include <stdio.h>
-#include <lcthw/dllist.h>
-#include <lcthw/dllist_algos.h>
+#include <lcthw/dllist/dllist.h>
+#include <lcthw/dllist/dllist_algos.h>
 
 int DLList_bubble_sort(DLList *list, DLList_compare cmp)
 {
     if (list->count <= 1)
         return 0;
     int sorted = 0;
-    DLListNode *cur = list->first;
     while (!sorted)
     {
         sorted = 1;

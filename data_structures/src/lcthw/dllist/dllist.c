@@ -1,4 +1,4 @@
-#include <lcthw/dllist.h>
+#include <lcthw/dllist/dllist.h>
 #include <lcthw/dbg.h>
 
 DLList *DLList_create()

@@ -1,5 +1,5 @@
 #include "minunit.h"
-#include <lcthw/dllist.h>
+#include <lcthw/dllist/dllist.h>
 #include <assert.h>
 
 static DLList *list = NULL;
