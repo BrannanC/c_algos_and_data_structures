@@ -1,13 +1,13 @@
 #include "minunit.h"
 #include <lcthw/darray/darray.h>
 
-stsatic DArray *array = NULL;
+static DArray *array = NULL;
 static int *val1 = NULL;
 static int *val2 = NULL;
 
 char *test_create()
 {
-    array = DArray_create(sizeof(int, 100));
+    array = DArray_create(sizeof(int), 100);
     mu_assert(array != NULL, "DArray_create failed.");
     mu_assert(array->contents != NULL, "Wrong contents in darray.");
     mu_assert(array->end == 0, "End should be 0.");
@@ -77,7 +77,7 @@ char *test_expand_contract()
     mu_assert((unsigned int)array->max == old_max + array->expand_rate, "Wrong size after expand.");
 
     DArray_contract(array);
-    mu_assert((unsigned int)array->max == array->expand_rate + 1, "Wrong size after contract.");
+    mu_assert((unsigned int)array->max == (unsigned int)array->expand_rate + 1, "Wrong size after contract.");
 
     DArray_contract(array);
     mu_assert((unsigned int)array->max == array->expand_rate + 1, "Max should never go below expand rate.");
@@ -92,7 +92,7 @@ char *test_push_pop()
     {
         int *val = DArray_new(array);
         *val = i * 333;
-        DArray_push(array);
+        DArray_push(array, val);
     }
 
     mu_assert(array->max == 1201, "Wrong max size after push.");
